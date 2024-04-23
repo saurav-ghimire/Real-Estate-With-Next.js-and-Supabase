@@ -2,6 +2,7 @@ import { Roboto } from 'next/font/google'
 
 import "./globals.css";
 import Provider from "./Provider";
+import { ClerkProvider } from '@clerk/nextjs'
 
 const roboto = Roboto({
   weight: ['100', '300', '400', '500', '700', '900'],
@@ -14,6 +15,7 @@ export const metadata = {
 
 export default function RootLayout({ children }) {
   return (
+    <ClerkProvider>
     <html lang="en">
       <body className={roboto.className}>
         <Provider>
@@ -21,5 +23,6 @@ export default function RootLayout({ children }) {
         </Provider>
         </body>
     </html>
+    </ClerkProvider>
   );
 }

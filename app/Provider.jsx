@@ -5,7 +5,7 @@ function Provider({children}) {
   return ( 
     <div>
       <Header />
-        <div className='px-4 md:px-20'>
+        <div className='px-4 mt-[150px] md:px-20'>
           {children }
         </div>
     </div>
