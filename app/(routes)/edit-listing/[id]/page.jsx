@@ -11,15 +11,55 @@ import {
   SelectValue,
 } from "@/components/ui/select"
 import { Textarea } from "@/components/ui/textarea"
+import { supabase } from "@/utils/supabase/client"
+import { useUser } from "@clerk/nextjs"
 import { Formik } from "formik"
+import {  useRouter } from "next/navigation"
+import { useEffect } from "react"
+import { toast } from "sonner"
 
-function EditListing() {
+function EditListing({params}) {
+  const {user} = useUser();
+  const router = useRouter();
+  useEffect(() => {
+    user&&verifyUserRecord();
+  },[user]);
+
+  const verifyUserRecord = async() => {
+    const {data, error} = await supabase
+    .from('listing')
+    .select('*')
+    .eq('createdBy', user?.primaryEmailAddress.emailAddress)
+    .eq('id', params.id);
+    if(data?.length <= 0){
+      router.replace('/');
+    }
+    if(error){
+      console.log(error)
+    }
+  }
+
+  const onSubmitHandler = async (formValue) => {
+    
+    const { data, error } = await supabase
+    .from('listing')
+    .update(formValue)
+    .eq('id', params.id)
+    .select()
+            
+    if(data){
+      console.log(data);
+      toast('Address Updated Successfully');
+    }
+  }
+
   return (
     <div className="px-10 md:px-2">
       <h2 className="font-bold text-2xl mb-2">Enter some more about listing</h2>
       <Formik
+      initialValues={{ type: ''}}
       onSubmit={(values) => (
-        console.log(values)
+        onSubmitHandler(values)
       )}
        >
         {({
@@ -38,7 +78,9 @@ function EditListing() {
             {/* Rent or Sell */}
             <div className="flex flex-col gap-2">
               <h2 className="text-lg text-slate-500 mb-2 font-medium">Rent or Sell</h2>
-              <RadioGroup defaultValue="rent">
+              <RadioGroup name='type' defaultValue="rent"
+              onValueChange={(e) => values.type=e}
+              >
                 <div className="flex items-center space-x-2">
                   <RadioGroupItem value="rent" id="rent" />
                   <Label htmlFor="rent">Rent</Label>
@@ -54,7 +96,7 @@ function EditListing() {
             <div className="flex flex-col gap-2">
               <h2 className="text-lg text-slate-500 mb-2 font-medium">Property Type</h2>
               <Select name="propertyType"
-              onValueChange={(e)=>console.log(e)}
+              onValueChange={(e)=>values.propertyType=e}
               >
                 <SelectTrigger className="w-[180px]">
                   <SelectValue placeholder="Select Property Type" />
@@ -117,8 +159,8 @@ function EditListing() {
             </div>
 
             <div className="flex gap-7">
-              <Button variant="outline" className='text-primary border-primary'>Save</Button>
-              <Button>Save and publish</Button>
+              <Button type='button' variant="outline" className='text-primary border-primary'>Save</Button>
+              <Button type='button'>Save and publish</Button>
             </div>
           </div>
         </div>
