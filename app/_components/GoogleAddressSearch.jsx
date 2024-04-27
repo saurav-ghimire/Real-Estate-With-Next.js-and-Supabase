@@ -1,14 +1,19 @@
 "use client"
 import { MapPin } from 'lucide-react';
-import GooglePlacesAutocomplete from 'react-google-places-autocomplete';
+import GooglePlacesAutocomplete, { geocodeByAddress, getLatLng } from 'react-google-places-autocomplete';
 
-function GoogleAddressSearch() {
+function GoogleAddressSearch({setCordinates, SelectedAddress}) {
   const selectProps = {
     placeholder: 'Search Property Address',
     isClearable: true,
     className: 'w-full',
     onChange: (place) => {
-      console.log(place); 
+      SelectedAddress(place);
+      geocodeByAddress(place.label)
+      .then(results => getLatLng(results[0]))
+      .then(({ lat, lng }) =>
+        setCordinates({ lat, lng })
+      );
     }
   };
 
