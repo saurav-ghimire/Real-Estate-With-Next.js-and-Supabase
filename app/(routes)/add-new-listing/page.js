@@ -4,6 +4,7 @@ import { Button } from '@/components/ui/button';
 import { supabase } from '@/utils/supabase/client';
 import { useUser } from '@clerk/nextjs';
 import React, { useState } from 'react';
+import { toast } from "sonner"
 
 function AddNewListing() {
   const {user} = useUser();
@@ -22,10 +23,11 @@ function AddNewListing() {
       ]).select();
 
       if(data){
-        console.log('Listing Successfully Added', data);
+        toast("Address Listed Successfully.")
+
       }
       if(error){
-        console.log('error', error);
+        toast("Error Listing Data.")
       }
               
   }
