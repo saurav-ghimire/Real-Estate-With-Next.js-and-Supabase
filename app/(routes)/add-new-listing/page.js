@@ -3,10 +3,14 @@ import GoogleAddressSearch from '@/app/_components/GoogleAddressSearch';
 import { Button } from '@/components/ui/button';
 import { supabase } from '@/utils/supabase/client';
 import { useUser } from '@clerk/nextjs';
+import { LocaleRouteNormalizer } from 'next/dist/server/future/normalizers/locale-route-normalizer';
+import { useRouter } from 'next/navigation';
+
 import React, { useState } from 'react';
 import { toast } from "sonner"
 
 function AddNewListing() {
+  const router = useRouter();
   const {user} = useUser();
   const [selectedAddress, setSelectedAddress] = useState();
   const [cordinates, setcordinates] = useState();
@@ -24,7 +28,7 @@ function AddNewListing() {
 
       if(data){
         toast("Address Listed Successfully.")
-
+        router.replace('/edit-listing/'+data[0].id)
       }
       if(error){
         toast("Error Listing Data.")

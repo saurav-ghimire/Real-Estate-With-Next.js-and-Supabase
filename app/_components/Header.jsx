@@ -25,7 +25,7 @@ function Header() {
         </ul>
       </div>
       <div className='flex gap-2'>
-        <Link href={'add-new-listing'}><Button className='flex gap-2 bg-primary'><PlusIcon className='w-5 m-0' /> Post Your Add</Button></Link>
+        <Link href={'/add-new-listing'}><Button className='flex gap-2 bg-primary'><PlusIcon className='w-5 m-0' /> Post Your Add</Button></Link>
         {
           isSignedIn ?
           <UserButton /> :
