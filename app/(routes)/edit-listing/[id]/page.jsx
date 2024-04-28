@@ -159,8 +159,8 @@ function EditListing({params}) {
                   <Label htmlFor="rent">Rent</Label>
                 </div>
                 <div className="flex items-center space-x-2">
-                  <RadioGroupItem value="sale" id="sale" />
-                  <Label htmlFor="sale">Sale</Label>
+                  <RadioGroupItem value="sell" id="Sell" />
+                  <Label htmlFor="Sell">Sell</Label>
                 </div>
               </RadioGroup>
             </div>
@@ -254,7 +254,7 @@ function EditListing({params}) {
             <div className="flex gap-7">
               <Button type='submit' variant="outline" className='text-primary border-primary'>
               {
-                  loading? <Loader /> : 'Save'
+                  loading? <Loader /> : 'Save as Draft'
                 }</Button>
               
             
