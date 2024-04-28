@@ -12,6 +12,7 @@ const config = {
         pathname: '/storage/v1/object/public/**',
       },
     ],
+    unoptimized: true,
   },
 };
 

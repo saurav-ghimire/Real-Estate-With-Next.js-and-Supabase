@@ -20,13 +20,27 @@ import { toast } from "sonner"
 import FileUpload from "../_components/fileUpload"
 import Loader from "./loader"
 
+import {
+  AlertDialog,
+  AlertDialogAction,
+  AlertDialogCancel,
+  AlertDialogContent,
+  AlertDialogDescription,
+  AlertDialogFooter,
+  AlertDialogHeader,
+  AlertDialogTitle,
+  AlertDialogTrigger,
+} from "@/components/ui/alert-dialog"
+
 
 function EditListing({params}) {
+  
   const {user} = useUser();
   const router = useRouter();
   const [images, setImages] = useState([]);
   const [loading, setLoading] = useState(false);
   const [listing, setListing] = useState([]);
+
   useEffect(() => {
     
     user&&verifyUserRecord();
@@ -91,6 +105,21 @@ function EditListing({params}) {
 
         setLoading(false);
     }
+  }
+
+  const onPublishHandler = async() => {
+    
+      const { data, error } = await supabase
+      .from('listing')
+      .update({ active: true })
+      .eq('id', params?.id)
+      .select()
+    if(data){
+      setLoading(false);
+      toast('Listing Published');
+    }else{
+      console.log(error)
+    }      
   }
 
   return (
@@ -223,11 +252,34 @@ function EditListing({params}) {
             </div>
 
             <div className="flex gap-7">
-              <Button variant="outline" className='text-primary border-primary'>Save</Button>
-              <Button disabled={loading}>
+              <Button type='submit' variant="outline" className='text-primary border-primary'>
+              {
+                  loading? <Loader /> : 'Save'
+                }</Button>
+              
+            
+            <AlertDialog>
+              <AlertDialogTrigger asChild>
+              <Button type='submit' disabled={loading}>
                 {
                   loading? <Loader /> : 'Save and publish'
                 }</Button>
+              </AlertDialogTrigger>
+              <AlertDialogContent>
+                <AlertDialogHeader>
+                  <AlertDialogTitle>Ready to Publish?</AlertDialogTitle>
+                  <AlertDialogDescription>
+                    Click publish if you want to publish this Listing.
+                  </AlertDialogDescription>
+                </AlertDialogHeader>
+                <AlertDialogFooter>
+                  <AlertDialogCancel>Cancel</AlertDialogCancel>
+                  <AlertDialogAction onClick={() => onPublishHandler()}>
+                    {loading?<Loader /> : 'Publish' }
+                    </AlertDialogAction>
+                </AlertDialogFooter>
+              </AlertDialogContent>
+            </AlertDialog>
             </div>
           </div>
         </div>
