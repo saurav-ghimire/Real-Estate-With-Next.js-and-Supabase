@@ -8,13 +8,17 @@ function GoogleAddressSearch({setCordinates, SelectedAddress}) {
     isClearable: true,
     className: 'w-full',
     onChange: (place) => {
-      SelectedAddress(place);
-      geocodeByAddress(place.label)
-      .then(results => getLatLng(results[0]))
-      .then(({ lat, lng }) =>
-        setCordinates({ lat, lng })
-      );
+      if (place && place.label) {
+        SelectedAddress(place);
+        geocodeByAddress(place.label)
+          .then(results => getLatLng(results[0]))
+          .then(({ lat, lng }) =>
+            setCordinates({ lat, lng })
+          )
+          .catch(error => console.error('Error geocoding address:', error));
+      }
     }
+    
   };
 
   return ( 
