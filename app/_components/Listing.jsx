@@ -5,7 +5,7 @@ import { useState } from "react";
 import { Button } from "@/components/ui/button";
 import Filter from "./Filter";
 
-function Listing({ listingData, handleSearchButton, searchAddress, setBathCount, setBedCount, setHomeType, setParkingCount }) {
+function Listing({ listingData, setCordinates, handleSearchButton, searchAddress, setBathCount, setBedCount, setHomeType, setParkingCount }) {
   const [address, setAddress] = useState("");
 
   return (
@@ -17,7 +17,7 @@ function Listing({ listingData, handleSearchButton, searchAddress, setBathCount,
               searchAddress(value);
               setAddress(value);
             }}
-            setCordinates={(value) => console.log(value)}
+            setCordinates={setCordinates}
           />
           <Button className="flex gap-2" onClick={handleSearchButton}>
             <Search className="h-4 w-4" /> Search

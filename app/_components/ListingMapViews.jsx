@@ -3,6 +3,7 @@ import { supabase } from "@/utils/supabase/client";
 import Listing from "./Listing";
 import { useEffect, useState } from "react";
 import { toast } from "sonner";
+import GoogleMapSection from "./GoogleMapSection";
 
 function ListingMapViews({type}) {
 
@@ -12,6 +13,8 @@ function ListingMapViews({type}) {
   const [bathCount, setBathCount] = useState(0);
   const [parkingCount, setParkingCount] = useState(0);
   const [homeType, setHomeType] = useState();
+  const [cordinates, setCordinates] = useState();
+  
   useEffect(() => {
     getLatestListing();
   },[])
@@ -45,10 +48,12 @@ function ListingMapViews({type}) {
     .gte('bedroom', bedCount )
     .order('id', {ascending:false})
     .like('address', '%'+searchTerm+'%')
-    const {data, error} = query
+    
+    
     if(homeType){
       query=query.eq('propertyType', homeType)
     }
+    const {data, error} = query
     if(data){
       SetListing(data);
     }
@@ -56,7 +61,7 @@ function ListingMapViews({type}) {
   }
 
   return ( 
-    <div className="grid grid-cols-1 md:grid-cols-2">
+    <div className="grid grid-cols-1 md:grid-cols-2 gap-8 relative">
       <div>
       <Listing 
       listingData={listing} handleSearchButton={handleSearchButton} searchAddress={(v)=>setSerachAddress(v)}
@@ -64,10 +69,13 @@ function ListingMapViews({type}) {
       setBedCount={setBedCount}
       setHomeType={setHomeType}
       setParkingCount={setParkingCount}
+      setCordinates={setCordinates}
        />
       </div>
-      <div>
-        Map
+      <div className="fixed right-10 h-full md:w-[350px] lg:w-[450px] xl:w-[650px]">
+        <GoogleMapSection
+        cordinates={cordinates}
+         />
       </div>
     </div>
    );
