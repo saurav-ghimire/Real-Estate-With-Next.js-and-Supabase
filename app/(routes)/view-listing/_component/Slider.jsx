@@ -8,7 +8,8 @@ import {
 import Image from "next/image";
 
 function Slider({imageList}) {
-  return ( <div className="mt-5">
+  return (
+     <div className="mt-5">
     {
       imageList ?
     <Carousel>
@@ -32,7 +33,8 @@ function Slider({imageList}) {
 
   </div>
 }
-  </div> );
+  </div> 
+);
 }
 
 export default Slider;

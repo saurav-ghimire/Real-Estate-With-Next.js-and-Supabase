@@ -3,6 +3,8 @@ import { supabase } from "@/utils/supabase/client";
 import { useEffect, useState } from "react";
 import { toast } from "sonner";
 import Slider from "../_component/Slider";
+import Details from "../_component/Details";
+
 
 function ViewListing({params}) {
   useEffect(() => {
@@ -28,6 +30,8 @@ function ViewListing({params}) {
   return ( 
     <div className="px-4 md:px-32 lg:px-32 my-3">
       <Slider imageList={listingDetails?.listingImages} />
+
+      <Details details={listingDetails} />
     </div>
    );
 }

@@ -12,7 +12,7 @@ function MarkerItem({item}) {
   return ( 
     <div>
       <MarkerF
-        position={item.coordinates}
+        position={item?.coordinates}
         onClick={handleMarkerClick}
         icon={{
           url:'/pin.png'
@@ -21,7 +21,7 @@ function MarkerItem({item}) {
         {
           selectedListing && 
           <OverlayView
-            position={selectedListing.coordinates}
+            position={selectedListing?.coordinates}
             mapPaneName={OverlayView.OVERLAY_MOUSE_TARGET}
           >
             <div>

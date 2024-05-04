@@ -1,6 +1,7 @@
 import { Button } from "@/components/ui/button";
 import { BathIcon, BedDouble, MapPin, Ruler, X } from "lucide-react";
 import Image from "next/image";
+import Link from "next/link";
 
 
 function MarketListingItem({item,  closeHandler}) {
@@ -13,6 +14,7 @@ function MarketListingItem({item,  closeHandler}) {
                 <X
                 onClick={() => closeHandler()}
                  />
+                 <Link href={'/view-listing/' + item.id}>
                 <Image
                   src={item.listingImages[0].url}
                   height={100}
@@ -33,6 +35,7 @@ function MarketListingItem({item,  closeHandler}) {
                   </div>
                   <Button className='sm'>View Details</Button>
                 </div>
+                </Link>
               </div>
     </>
    );
