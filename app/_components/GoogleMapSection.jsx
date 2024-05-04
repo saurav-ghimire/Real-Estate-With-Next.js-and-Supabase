@@ -9,7 +9,12 @@ const containerStyle = {
 
 
 function GoogleMapSection({cordinates, listing}) {
+  
+  // listing && listing.map((item, index) => (
+  //   console.log('i am here', item)
+  // ))
 
+  
   const [center, setCenter] = useState({
     lat: 61.0666922, // Latitude of Canada
     lng: -107.991707 // Longitude of Canada
@@ -33,11 +38,11 @@ function GoogleMapSection({cordinates, listing}) {
     map.fitBounds(bounds);
 
     setMap(map)
-  }, [])
+  }, [listing])
 
   const onUnmount = React.useCallback(function callback(map) {
     setMap(null)
-  }, [])
+  }, [listing])
   
   return ( 
     <div>
@@ -49,13 +54,14 @@ function GoogleMapSection({cordinates, listing}) {
         onLoad={onLoad}
         onUnmount={onUnmount}
       >
-        {listing?.map((item, index) =>(
+        {listing && listing.map((item, index) =>(
+          
           <MarkerItem
           key={index}
           item={item}
            />
         ))}
-        <></>
+        
       </GoogleMap>
     </div>
 
