@@ -29,15 +29,18 @@ function GoogleMapSection({cordinates, listing}) {
 
   const [map, setMap] = React.useState(null)
 
-  useEffect(()=>{
-    cordinates&&setCenter(cordinates);
-  },[cordinates])
+  useEffect(() => {
+    // Center the map around the average coordinates of the listings
+    if (listing && listing.length > 0) {
+      const sumLat = listing.reduce((acc, item) => acc + item.coordinates.lat, 0);
+      const sumLng = listing.reduce((acc, item) => acc + item.coordinates.lng, 0);
+      const avgLat = sumLat / listing.length;
+      const avgLng = sumLng / listing.length;
+      setCenter({ lat: avgLat, lng: avgLng });
+    }
+  }, [listing]);
   const onLoad = React.useCallback(function callback(map) {
-    // This is just an example of getting and using the map instance!!! don't just blindly copy!
-    const bounds = new window.google.maps.LatLngBounds(center);
-    map.fitBounds(bounds);
-
-    setMap(map)
+      setMap(map)
   }, [listing])
 
   const onUnmount = React.useCallback(function callback(map) {
@@ -50,7 +53,7 @@ function GoogleMapSection({cordinates, listing}) {
       <GoogleMap
         mapContainerStyle={containerStyle}
         center={center}
-        zoom={5}
+        zoom={10}
         onLoad={onLoad}
         onUnmount={onUnmount}
       >
