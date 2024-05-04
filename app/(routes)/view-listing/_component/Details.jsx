@@ -1,5 +1,5 @@
 import GoogleMapSection from "@/app/_components/GoogleMapSection";
-import { BathIcon, BedDouble, MapPin, Ruler } from "lucide-react";
+import {  MapPin, Share } from "lucide-react";
 import Image from "next/image";
 
 function Details({ details }) {
@@ -8,8 +8,20 @@ function Details({ details }) {
     <div className="container mx-auto p-8">
       <div className="grid grid-cols-1 md:grid-cols-1 gap-8">
         <div>
-          <h2 className="text-4xl font-bold mb-4">${details?.price}</h2>
-          <p className="text-gray-600 mb-4">{details?.address}</p>
+        <div className="flex items-center justify-between mb-5">
+          <div>
+          <h2 className="text-4xl font-bold mb-2">${details?.price}</h2>
+          <p className="text-gray-600 mb-2 flex items-center gap-2">
+            <MapPin />
+            {details?.address}
+          </p>
+        </div>
+        {/* Share Button */}
+        <button className="bg-primary text-white font-bold py-2 px-4 rounded p-3">
+          <Share className="h-4 w-4 mr-2 inline-block" />
+          Share
+        </button>
+        </div>
           <div className="grid grid-cols-1 md:grid-cols-4 gap-4 mb-4">
             <div className="flex items-center bg-gray-200 rounded-md p-2">
               <span className="text-lg font-bold ">Property Type:</span>

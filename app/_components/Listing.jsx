@@ -44,7 +44,7 @@ function Listing({ listingData, setCordinates, handleSearchButton, searchAddress
                 className="p-2 border border-transparent cursor-pointer rounded-md transition-colors hover:border-primary"
               >
                 <Image
-                  src={item.listingImages[0].url}
+                  src={item?.listingImages[0]?.url}
                   height={200}
                   width={700}
                   alt="Image"
