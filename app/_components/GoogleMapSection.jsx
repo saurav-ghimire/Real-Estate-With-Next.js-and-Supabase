@@ -50,12 +50,12 @@ function GoogleMapSection({cordinates, listing}) {
       <GoogleMap
         mapContainerStyle={containerStyle}
         center={center}
-        zoom={12}
+        zoom={5}
         onLoad={onLoad}
         onUnmount={onUnmount}
       >
         {listing && listing.map((item, index) =>(
-          
+
           <MarkerItem
           key={index}
           item={item}

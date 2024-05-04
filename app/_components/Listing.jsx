@@ -4,6 +4,7 @@ import GoogleAddressSearch from "./GoogleAddressSearch";
 import { useState } from "react";
 import { Button } from "@/components/ui/button";
 import Filter from "./Filter";
+import Link from "next/link";
 
 function Listing({ listingData, setCordinates, handleSearchButton, searchAddress, setBathCount, setBedCount, setHomeType, setParkingCount }) {
   const [address, setAddress] = useState("");
@@ -37,7 +38,8 @@ function Listing({ listingData, setCordinates, handleSearchButton, searchAddress
         <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
           {listingData?.length > 0 ? (
             listingData?.map((item, index) => (
-              <div
+              <Link href={'/view-listing/' + item.id}>
+                  <div
                 key={index}
                 className="p-2 border border-transparent cursor-pointer rounded-md transition-colors hover:border-primary"
               >
@@ -66,6 +68,7 @@ function Listing({ listingData, setCordinates, handleSearchButton, searchAddress
                   </div>
                 </div>
               </div>
+              </Link>
             ))
           ) : (
             [1, 2, 3, 4].map((item, index) => (
