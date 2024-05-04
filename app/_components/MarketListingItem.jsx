@@ -1,3 +1,4 @@
+import { Button } from "@/components/ui/button";
 import { BathIcon, BedDouble, MapPin, Ruler, X } from "lucide-react";
 import Image from "next/image";
 
@@ -29,8 +30,8 @@ function MarketListingItem({item,  closeHandler}) {
                     <h2 className="flex w-full gap-2 text-sm bg-slate-100 rounded-md p-2 text-gray-500 justify-center items-center">
                       <BathIcon className="h-4 w-4" /> {item.bathroom}
                     </h2>
-                    
                   </div>
+                  <Button className='sm'>View Details</Button>
                 </div>
               </div>
     </>

@@ -14,7 +14,7 @@ function ListingMapViews({type}) {
   const [parkingCount, setParkingCount] = useState(0);
   const [homeType, setHomeType] = useState();
   const [cordinates, setCordinates] = useState();
-  
+  console.log(homeType)
   useEffect(() => {
     getLatestListing();
   },[])
@@ -48,11 +48,11 @@ function ListingMapViews({type}) {
     .gte('bedroom', bedCount )
     .order('id', {ascending:false})
     .like('address', '%'+searchTerm+'%')
+    .eq('propertyType', homeType)
     
-    
-    if(homeType){
-      query=query.eq('propertyType', homeType)
-    }
+    // if(homeType){
+    //   query=query.eq('propertyType', homeType)
+    // }
     const {data, error} = query
     if(data){
       SetListing(data);
