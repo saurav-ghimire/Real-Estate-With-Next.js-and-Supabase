@@ -31,7 +31,8 @@ function AddNewListing() {
         router.replace('/edit-listing/'+data[0].id)
       }
       if(error){
-        toast("Error Listing Data.")
+        toast("Error Listing Data.");
+        console.log(error)
       }
               
   }

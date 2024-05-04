@@ -1,14 +1,14 @@
 "use client"
 import React, { useEffect, useState } from 'react'
 import { GoogleMap, useJsApiLoader } from '@react-google-maps/api';
-
+import MarkerItem from './MarkerItem';
 const containerStyle = {
   width: '100%',
   height: '80vh'
 };
 
 
-function GoogleMapSection({cordinates}) {
+function GoogleMapSection({cordinates, listing}) {
 
   const [center, setCenter] = useState({
     lat: 61.0666922, // Latitude of Canada
@@ -49,7 +49,12 @@ function GoogleMapSection({cordinates}) {
         onLoad={onLoad}
         onUnmount={onUnmount}
       >
-        { /* Child components, such as markers, info windows, etc. */ }
+        {listing?.map((item, index) =>(
+          <MarkerItem
+          key={index}
+          item={item}
+           />
+        ))}
         <></>
       </GoogleMap>
     </div>
