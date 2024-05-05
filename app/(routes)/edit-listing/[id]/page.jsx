@@ -123,7 +123,7 @@ function EditListing({params}) {
   }
 
   return (
-    <div className="px-10 md:px-2">
+    <div className="px-1 md:px-2">
       <h2 className="font-bold text-2xl mb-2">Enter some more about listing</h2>
       <Formik
       initialValues={{ 
@@ -183,7 +183,7 @@ function EditListing({params}) {
             </div>
 
             {/* Multiple Fields Wrapper */}
-            <div className="md:col-span-3 grid grid-cols-3 gap-6">
+            <div className="md:col-span-3 grid grid-cols-1 gap-6">
               <div className="flex flex-col">
                 <Label className='text-lg text-slate-500 mb-2 font-medium' htmlFor="bedroom">Bedroom</Label>
                 <Input type="number" id="bedroom" name="bedroom" placeholder="Ex. 2"

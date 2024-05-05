@@ -32,10 +32,10 @@ function GoogleMapSection({cordinates, listing}) {
   useEffect(() => {
     // Center the map around the average coordinates of the listings
     if (listing && listing.length > 0) {
-      const sumLat = listing.reduce((acc, item) => acc + item.coordinates.lat, 0);
-      const sumLng = listing.reduce((acc, item) => acc + item.coordinates.lng, 0);
-      const avgLat = sumLat / listing.length;
-      const avgLng = sumLng / listing.length;
+      const sumLat = listing.reduce((acc, item) => acc + item?.coordinates.lat, 0);
+      const sumLng = listing.reduce((acc, item) => acc + item?.coordinates.lng, 0);
+      const avgLat = sumLat / listing?.length;
+      const avgLng = sumLng / listing?.length;
       setCenter({ lat: avgLat, lng: avgLng });
     }
   }, [listing]);

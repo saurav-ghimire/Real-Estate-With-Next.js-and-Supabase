@@ -12,7 +12,7 @@ function Listing({ listingData, setCordinates, handleSearchButton, searchAddress
   return (
     <>
       <div>
-        <div className="p-3 flex gap-4 items-center">
+        <div className="p-3 block md:flex gap-4 items-center">
           <GoogleAddressSearch
             SelectedAddress={(value) => {
               searchAddress(value);
@@ -20,7 +20,7 @@ function Listing({ listingData, setCordinates, handleSearchButton, searchAddress
             }}
             setCordinates={setCordinates}
           />
-          <Button className="flex gap-2" onClick={handleSearchButton}>
+          <Button className="flex gap-2 w-full mt-3 md:mt-0 md:w-auto" onClick={handleSearchButton}>
             <Search className="h-4 w-4" /> Search
           </Button>
         </div>

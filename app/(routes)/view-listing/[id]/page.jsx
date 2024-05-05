@@ -28,7 +28,7 @@ function ViewListing({params}) {
 
   
   return ( 
-    <div className="px-4 md:px-32 lg:px-32 my-3">
+    <div className="px-4 md:px-32 lg:px-32 my-3 overflow-hidden">
       <Slider imageList={listingDetails?.listingImages} />
 
       <Details details={listingDetails} />

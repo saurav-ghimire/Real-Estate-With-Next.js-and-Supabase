@@ -11,7 +11,7 @@ function Provider({children}) {
       libraries={['places']}
       >
       <Header />
-        <div className='px-4 mt-[100px] md:px-20'>
+        <div className='px-4 mt-1 md:mt-[100px] md:px-20'>
           {children }
         </div>
         </LoadScript>
